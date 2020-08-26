@@ -1,5 +1,3 @@
-#include <stdint.h>
-#include <stdbool.h>
 /** Maximum length of a key. */
 #define KEY_MAX_LENGTH 250
 
