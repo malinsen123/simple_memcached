@@ -3,12 +3,12 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
 #include <time.h>
 #include <assert.h>
 #include <limits.h>
 #include <stddef.h>
+
 
 
 #define COMMAND_TOKEN 0
@@ -318,6 +318,8 @@ int main (int argc, char **argv) {
     printf("Welcome to simple_memcached\n");
     hash_init(hash_power_value);
     slabs_init(settings.maxbytes, settings.factor, preallocate);
+    
+}  
 
     return 0;
 }

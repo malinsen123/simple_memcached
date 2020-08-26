@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 /** Maximum length of a key. */
 #define KEY_MAX_LENGTH 250
 
@@ -108,7 +109,7 @@ typedef struct stat_{
 #include "slab.h"
 #include "hash_functions.h"
 #include "items.h"
-#include "hash.h"
+
 
 uint32_t hash(const char *key, const int nkey);
 
