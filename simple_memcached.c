@@ -1,4 +1,4 @@
-#include "simple_memcached.h"
+
 #include <stdarg.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -8,7 +8,9 @@
 #include <assert.h>
 #include <limits.h>
 #include <stddef.h>
-
+#include <stdbool.h>
+#include <stdint.h>
+#include "simple_memcached.h"
 
 
 #define COMMAND_TOKEN 0
@@ -274,7 +276,6 @@ int item_replace(item *it, item *new_it){
 void  item_unlink(item *it){
     uint32_t hv = hash(it-> key, it->nkey);
     do_item_unlink(it);
-    if(do_item_get)
 }
 
 void  item_update(item *it){
@@ -318,8 +319,5 @@ int main (int argc, char **argv) {
     printf("Welcome to simple_memcached\n");
     hash_init(hash_power_value);
     slabs_init(settings.maxbytes, settings.factor, preallocate);
-    
-}  
-
     return 0;
 }
