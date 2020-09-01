@@ -171,8 +171,7 @@ void Command_process_stats(stat* stats){
 
 
 
-
-static void stat_print(stat* stats) {
+void stat_print(stat* stats) {
     printf("hash_power_value: %llu\n", stats->hash_power_value);
     printf("slab_factor: %u\n", stats->slab_factor);
 
@@ -200,7 +199,7 @@ static stat* stats_initial(uint64_t hash_power_value){
     stats->slab_factor = 1.2 ;
 
     if(stats != NULL ){
-        printf("Stats initialization success.\n", );
+        printf("Stats initialization success.\n");
 
     }
 
