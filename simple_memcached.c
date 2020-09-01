@@ -125,7 +125,7 @@ item * Command_process_set(token_t *tokens, stat* stats){
         return NULL;
     }
     else{
-        it = item_alloc(tokens[KEY_TOKEN].value, tokens[KEY_TOKEN].length, atoi(tokens[2].value), atoi(tokens[3].value), atoi(tokens[4].value ), atoi(tokens[5]).value, stats);
+        it = item_alloc(tokens[KEY_TOKEN].value, tokens[KEY_TOKEN].length, atoi(tokens[2].value), atoi(tokens[3].value), atoi(tokens[4].value ), atoi(tokens[5].value), stats);
         return it;
     }
 }
