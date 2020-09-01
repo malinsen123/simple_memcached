@@ -29,7 +29,7 @@ void *slabs_alloc(const size_t size, unsigned int id);
 void slabs_free(void *ptr, size_t size, unsigned int id);
 
 /** Adjust memory requested for one slab */
-void slabs_adjust_mem_requested(unsigned int id, size_t old, size_t ntotal)
+void slabs_adjust_mem_requested(unsigned int id, size_t old, size_t ntotal);
 
 
 
