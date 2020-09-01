@@ -111,7 +111,7 @@ typedef struct stat_{
 
 uint32_t hash(const char *key, const int nkey);
 
-item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, int values );
+item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, int values, stat* stats );
 item *item_get(const char *key, const size_t nkey);
 item *item_touch(const char *key, const size_t nkey, uint32_t exptime);
 int   item_link(item *it);
