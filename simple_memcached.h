@@ -20,8 +20,8 @@
 #define MAX_BYTES_DEFAULT 1024* 1024
 
 
-#define ITEM_key(item) (((char*)((item)->data)) \
-         + ((item)->it_flags ? sizeof(uint64_t) : 0))
+#define ITEM_key(item) ((char*)((item)->data)) \
+
 
 #define ITEM_suffix(item) ((char*)((item)->data) + (item)->nkey + 1 \
          + ((item)->it_flags ? sizeof(uint64_t) : 0))
