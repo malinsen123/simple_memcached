@@ -172,29 +172,29 @@ void Command_process_stats(stat* stats){
 
 
 void stat_print(stat* stats) {
-    printf("hash_power_value: %llu\n", stats->hash_power_value);
+    printf("hash_power_value: %lu\n", stats->hash_power_value);
     printf("slab_factor: %u\n", stats->slab_factor);
 
-    printf("current_bytes: %llu\n", stats->current_bytes);
-    printf("total_items: %llu\n", stats->total_items);
-    printf("current_items: %llu\n", stats->current_items);
+    printf("current_bytes: %lu\n", stats->current_bytes);
+    printf("total_items: %lu\n", stats->total_items);
+    printf("current_items: %lu\n", stats->current_items);
 
-    printf("put_cmds: %llu\n", stats->put_cmds);
-    printf("put_hits: %llu\n", stats->put_hits);
-    printf("put_misses: %llu\n", stats->put_misses);
+    printf("put_cmds: %lu\n", stats->put_cmds);
+    printf("put_hits: %lu\n", stats->put_hits);
+    printf("put_misses: %lu\n", stats->put_misses);
 
-    printf("get_cmds: %llu\n", stats->get_cmds);
-    printf("get_hits: %llu\n", stats->get_hits);
-    printf("get_misses: %llu\n", stats->get_misses);
+    printf("get_cmds: %lu\n", stats->get_cmds);
+    printf("get_hits: %lu\n", stats->get_hits);
+    printf("get_misses: %lu\n", stats->get_misses);
 
-    printf("del_cmds: %llu\n", stats->del_cmds);
-    printf("del_hits: %llu\n", stats->del_hits);
-    printf("del_misses: %llu\n", stats->del_misses);
+    printf("del_cmds: %lu\n", stats->del_cmds);
+    printf("del_hits: %lu\n", stats->del_hits);
+    printf("del_misses: %lu\n", stats->del_misses);
 
 }
 
 static stat* stats_initial(uint64_t hash_power_value){
-    stat* stats = stat();
+    stat* stats = new stat();
     stats->hash_power_value= hash_power_value ;
     stats->slab_factor = 1.2 ;
 
@@ -244,7 +244,7 @@ item *item_touch(const char *key, const size_t nkey, uint32_t exptime){
 }
 
 int item_link(item *it){
-    uint32_t hv = hash(key, nkey);
+    uint32_t hv = hash(it->key, it->nkey);
     if(do_item_link(it, hv)){
         printf("Successful link an item\n");
         return 1;
