@@ -278,8 +278,7 @@ void  item_unlink(item *it){
 }
 
 void  item_update(item *it){
-    uint32_t hv = hash(ITEM_key(it), it->nkey);
-    do_item_update(it, hv);
+    do_item_update(it);
 }
 
 
