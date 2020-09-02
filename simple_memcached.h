@@ -99,7 +99,7 @@ struct stat_{
     uint64_t del_hits;
     uint64_t del_misses;
 
-} stat_default ={0, False, 0,0,0,0,0,0,0,0,0,0,0,0,0};
+} stat_default ={0, false, 0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 typedef struct stat_ stat;
 
