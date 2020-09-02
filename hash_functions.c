@@ -1,10 +1,10 @@
-#include "memcached.h"
-#include "hash_functions.h"
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include "simple_memcached.h"
+#include "hash_functions.h"
 
 
 

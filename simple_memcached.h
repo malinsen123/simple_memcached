@@ -37,6 +37,9 @@
 /** Time relative to server start. Smaller than time_t on 64-bit systems. */
 typedef unsigned int rel_time_t;
 
+/* current time of day (updated periodically) */
+extern volatile rel_time_t current_time;
+
 
 
 #define ITEM_LINKED 1
@@ -106,6 +109,8 @@ typedef struct stat_ stat;
 
 
 
+
+
 #include "slab.h"
 #include "hash_functions.h"
 #include "items.h"
@@ -113,7 +118,7 @@ typedef struct stat_ stat;
 
 uint32_t hash(const char *key, const int nkey);
 
-item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, int values, stat* stats );
+item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, stat* stats );
 item *item_get(const char *key, const size_t nkey, stat* stats);
 item *item_touch(const char *key, const size_t nkey, uint32_t exptime);
 int   item_link(item *it);

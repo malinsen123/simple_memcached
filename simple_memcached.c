@@ -163,13 +163,6 @@ void Command_process_delete(token_t *tokens, stat* stats){
     }   
 }
 
-void Command_process_stats(stat* stats){
-    stat_print(stats);
-    printf("Successful\n");
-    return;
-}
-
-
 
 void stat_print(stat* stats) {
     printf("hash_power_value: %lu\n", stats->hash_power_value);
@@ -206,9 +199,16 @@ static stat* stats_initial(uint64_t hash_power_value){
 
 }
 
-item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, int values, stat* stats){
+void Command_process_stats(stat* stats){
+    stat_print(stats);
+    printf("Successful\n");
+    return;
+}
+
+
+item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, stat* stats){
     item* it;
-    it= do_item_alloc(key, nkey, flags, exptime, nbytes, values);
+    it= do_item_alloc(key, nkey, flags, exptime, nbytes);
     stats-> put_cmds++;
     if (it !=NULL){
         stats->current_items ++;

@@ -44,8 +44,7 @@ static size_t item_make_header(const uint8_t nkey, const int flags, const int nb
 
 /*@null@*/
 item *do_item_alloc(char *key, const size_t nkey, const int flags,
-                    const rel_time_t exptime, const int nbytes,
-                    const char* values) {
+                    const rel_time_t exptime, const int nbytes) {
     uint8_t nsuffix;
     item *it = NULL;
     char suffix[40];
@@ -107,7 +106,6 @@ item *do_item_alloc(char *key, const size_t nkey, const int flags,
     it->it_flags = 0;
     it->nkey = nkey;
     it->nbytes = nbytes; 
-    it->data = ;
     memcpy(ITEM_key(it), key, nkey);
     it->exptime = exptime;
     memcpy(ITEM_suffix(it), suffix, (size_t)nsuffix);
