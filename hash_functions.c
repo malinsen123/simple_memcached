@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <stdint.h>
+#include <stdbool.h>
 #include "simple_memcached.h"
 #include "hash_functions.h"
 

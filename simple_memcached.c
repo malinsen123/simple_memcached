@@ -125,7 +125,7 @@ item * Command_process_set(token_t *tokens, stat* stats){
         return NULL;
     }
     else{
-        it = item_alloc(tokens[KEY_TOKEN].value, tokens[KEY_TOKEN].length, atoi(tokens[2].value), atoi(tokens[3].value), atoi(tokens[4].value ), atoi(tokens[5].value), stats);
+        it = item_alloc(tokens[KEY_TOKEN].value, tokens[KEY_TOKEN].length, atoi(tokens[2].value), atoi(tokens[3].value), atoi(tokens[4].value), stats);
         return it;
     }
 }
@@ -244,10 +244,13 @@ item *item_touch(const char *key, const size_t nkey, uint32_t exptime){
     return it;
 }
 
-int item_link(item *it){
+int item_link(item *it , stat * stats){
     uint32_t hv = hash(ITEM_key(it), it->nkey);
     if(do_item_link(it, hv)){
         printf("Successful link an item\n");
+        stats->curr_bytes += ITEM_ntotal(it);
+        stats->curr_items += 1;
+        stats->total_items += 1;
         return 1;
     }
     else{

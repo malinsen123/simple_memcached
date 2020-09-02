@@ -121,7 +121,7 @@ uint32_t hash(const char *key, const int nkey);
 item *item_alloc(char *key, size_t nkey, int flags, rel_time_t exptime, int nbytes, stat* stats );
 item *item_get(const char *key, const size_t nkey, stat* stats);
 item *item_touch(const char *key, const size_t nkey, uint32_t exptime);
-int   item_link(item *it);
+int   item_link(item *it, stat* stats);
 void  item_remove(item *it);
 int   item_replace(item *it, item *new_it, const uint32_t hv);
 void  item_unlink(item *it);
