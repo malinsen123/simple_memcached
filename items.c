@@ -1,9 +1,11 @@
-#include "simple_memcached.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include <assert.h>
+#include "simple_memcached.h"
 
 
 /* Forward Declarations */
