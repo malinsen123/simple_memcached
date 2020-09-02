@@ -1,10 +1,11 @@
-#include "simple_memcached.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-
+#include "simple_memcached.h"
 /* powers-of-N allocation structures */
 
 typedef struct {
