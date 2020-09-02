@@ -273,12 +273,12 @@ int item_replace(item *it, item *new_it, const uint32_t hv){
 }
 
 void  item_unlink(item *it){
-    uint32_t hv = hash(ITEM_key(item), it->nkey);
+    uint32_t hv = hash(ITEM_key(it), it->nkey);
     do_item_unlink(it);
 }
 
 void  item_update(item *it){
-    uint32_t hv = hash(ITEM_key(item), it->nkey);
+    uint32_t hv = hash(ITEM_key(it), it->nkey);
     do_item_update(it);
 }
 
