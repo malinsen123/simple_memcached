@@ -41,7 +41,7 @@ static bool expanding = false;
  */
 static unsigned int expand_bucket = 0;
 // Initialize the hashtable
-void hash_init(const int hashtable_init){
+void do_hash_init(const int hashtable_init){
 
 	if(hashtable_init){
 		hashpower = hashtable_init;
@@ -52,7 +52,6 @@ void hash_init(const int hashtable_init){
         exit(EXIT_FAILURE);
     }
 
-    stats.hash_power_level = hashpower;
     fprintf(stderr, "Successfully intialize the hashtable.\n");
 
 }
@@ -108,7 +107,7 @@ static item** _hashitem_before (const char *key, const size_t nkey, const uint32
 int hash_insert(item *it, const uint32_t hv) {
     unsigned int oldbucket;
 
-	assert(hash_find(ITEM_key(it), it->nkey) == 0);
+	assert(hash_find(ITEM_key(it), it->nkey, hv) == 0);
 
 
     if (expanding &&

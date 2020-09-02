@@ -248,8 +248,8 @@ int item_link(item *it , stat * stats){
     uint32_t hv = hash(ITEM_key(it), it->nkey);
     if(do_item_link(it, hv)){
         printf("Successful link an item\n");
-        stats->curr_bytes += ITEM_ntotal(it);
-        stats->curr_items += 1;
+        stats->current_bytes += ITEM_ntotal(it);
+        stats->current_items += 1;
         stats->total_items += 1;
         return 1;
     }
@@ -298,6 +298,11 @@ unsigned short refcount_decr(unsigned short *refcount) {
     res = *refcount;
      return res;
 
+}
+
+void hash_init(hash_power_value, stat* stats){
+    do_hash_init(hash_power_value);
+    stats->hash_power_value =hash_power_value;
 }
 
 /*
