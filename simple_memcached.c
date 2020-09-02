@@ -244,7 +244,7 @@ item *item_touch(const char *key, const size_t nkey, uint32_t exptime){
 }
 
 int item_link(item *it){
-    uint32_t hv = hash(it->key, it->nkey);
+    uint32_t hv = hash(ITEM_key(it), it->nkey);
     if(do_item_link(it, hv)){
         printf("Successful link an item\n");
         return 1;
@@ -259,9 +259,8 @@ void  item_remove(item *it){
 
 }
 
-int item_replace(item *it, item *new_it){
+int item_replace(item *it, item *new_it, const uint32_t hv){
     int ret;
-    uint32_t hv = hash(it->key, it->nkey);
     ret= do_item_replace(it, new_it, hv);
     if (ret){
         printf("Successful replace an item\n");
@@ -273,13 +272,13 @@ int item_replace(item *it, item *new_it){
 }
 
 void  item_unlink(item *it){
-    uint32_t hv = hash(it-> key, it->nkey);
+    uint32_t hv = hash(ITEM_key(item), it->nkey);
     do_item_unlink(it);
 }
 
 void  item_update(item *it){
-    uint32_t hv = hash(it-> key, it->nkey);
-    do_item_update(it,hv);
+    uint32_t hv = hash(ITEM_key(item), it->nkey);
+    do_item_update(it);
 }
 
 
