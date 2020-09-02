@@ -21,18 +21,18 @@
 
 
 #define ITEM_key(item) (((char*)&((item)->data)) \
-         + (((item)->it_flags) ? sizeof(uint64_t) : 0))
+         + ((item)->it_flags ? sizeof(uint64_t) : 0))
 
 #define ITEM_suffix(item) ((char*) &((item)->data) + (item)->nkey + 1 \
-         + (((item)->it_flags) ? sizeof(uint64_t) : 0))
+         + ((item)->it_flags ? sizeof(uint64_t) : 0))
 
 #define ITEM_data(item) ((char*) &((item)->data) + (item)->nkey + 1 \
          + (item)->nsuffix \
-         + (((item)->it_flags) ? sizeof(uint64_t) : 0))
+         + ((item)->it_flags ? sizeof(uint64_t) : 0))
 
 #define ITEM_ntotal(item) (sizeof(struct _stritem) + (item)->nkey + 1 \
          + (item)->nsuffix + (item)->nbytes \
-         + (((item)->it_flags) ? sizeof(uint64_t) : 0))
+         + ((item)->it_flags ? sizeof(uint64_t) : 0))
 
 /** Time relative to server start. Smaller than time_t on 64-bit systems. */
 typedef unsigned int rel_time_t;
