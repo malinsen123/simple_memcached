@@ -274,12 +274,12 @@ int item_replace(item *it, item *new_it, const uint32_t hv){
 
 void  item_unlink(item *it){
     uint32_t hv = hash(ITEM_key(it), it->nkey);
-    do_item_unlink(it);
+    do_item_unlink(it, hv);
 }
 
 void  item_update(item *it){
     uint32_t hv = hash(ITEM_key(it), it->nkey);
-    do_item_update(it);
+    do_item_update(it, hv);
 }
 
 
@@ -317,6 +317,6 @@ int main (int argc, char **argv) {
 
     printf("Welcome to simple_memcached\n");
     hash_init(hash_power_value);
-    slabs_init(settings.maxbytes, factor, preallocate);
+    slabs_init(maxbytes, factor, preallocate);
     return 0;
 }
