@@ -317,6 +317,6 @@ int main (int argc, char **argv) {
 
     printf("Welcome to simple_memcached\n");
     hash_init(hash_power_value);
-    slabs_init(settings.maxbytes, settings.factor, preallocate);
+    slabs_init(settings.maxbytes, factor, preallocate);
     return 0;
 }
