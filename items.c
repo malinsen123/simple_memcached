@@ -196,11 +196,6 @@ int do_item_link(item *it, const uint32_t hv) {
     it->it_flags |= ITEM_LINKED;
     it->time = current_time;
 
-    stats.curr_bytes += ITEM_ntotal(it);
-    stats.curr_items += 1;
-    stats.total_items += 1;
-
-
     hash_insert(it, hv);
 
     item_link_q(it);

@@ -1,5 +1,5 @@
 // Initialize the hashtable
-void hash_init(const int hashpower_init);
+void do_hash_init(const int hashpower_init);
 
 // Find a item in the hashtable
 item *hash_find(const char *key, const size_t nkey, const uint32_t hv);
