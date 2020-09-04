@@ -88,8 +88,11 @@ void slabs_init(const size_t limit,
                     " one large chunk.\nWill allocate in smaller chunks\n");
         }
     }
-
+    printf("Come to here 1\n");
     memset(slabclass, 0, sizeof(slabclass));
+
+    printf("Come to here 2\n");
+
 
     while (++i < POWER_LARGEST && size <= 1048576 / factor) {
         /* Make sure items are always n-byte aligned */
