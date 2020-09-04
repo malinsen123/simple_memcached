@@ -300,7 +300,7 @@ unsigned short refcount_decr(unsigned short *refcount) {
 
 }
 
-void hash_init(hash_power_value, stat* stats){
+void hash_init(uint64_t hash_power_value, stat* stats){
     do_hash_init(hash_power_value);
     stats->hash_power_value =hash_power_value;
 }
@@ -321,9 +321,11 @@ int main (int argc, char **argv) {
     uint64_t maxbytes = MAX_BYTES_DEFAULT;
     double factor = FACTOR_DEFAULT;
     uint64_t hash_power_value = HASHPOWER_DEFAULT;
+    stat* stats;
 
     printf("Welcome to simple_memcached\n");
-    hash_init(hash_power_value);
+    stats = stats_initial(hash_power_value);
+    hash_init(hash_power_value, stats);
     slabs_init(maxbytes, factor, preallocate);
     return 0;
 }

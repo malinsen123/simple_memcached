@@ -104,7 +104,7 @@ static item** _hashitem_before (const char *key, const size_t nkey, const uint32
 }
 
 /* Note: this isn't an assoc_update.  The key must not already exist to call this */
-int hash_insert(item *it, const uint32_t hv) {
+int hash_insert(item *it, const uint32_t hv, stat* stats) {
     unsigned int oldbucket;
 
 	assert(hash_find(ITEM_key(it), it->nkey, hv) == 0);
@@ -152,7 +152,7 @@ void hash_delete(const char *key, const size_t nkey, const uint32_t hv) {
 }
 
 /* grows the hashtable to the next power of 2. */
-static void hash_start_expand(void) {
+static void hash_start_expand(stat* stats) {
     old_hashtable = primary_hashtable;
 
     primary_hashtable = calloc(hashsize(hashpower + 1), sizeof(void *));
@@ -174,9 +174,9 @@ static void hash_start_expand(void) {
 }
 
 
-static void *hash_table_expand(void) {
+static void *hash_table_expand(stat* stats) {
 
-        hash_start_expand();
+        hash_start_expand(stats);
         
         int i;
         unsigned int old_hashtable_sizes;

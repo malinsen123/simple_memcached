@@ -69,7 +69,7 @@ unsigned int slabs_clsid(const size_t size) {
  */
 void slabs_init(const size_t limit, 
                   const double factor,
-                  const bool prealloc  {
+                  const bool prealloc)  {
     int i = POWER_SMALLEST - 1;
     unsigned int size = sizeof(item) + 48;
 
