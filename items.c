@@ -250,7 +250,7 @@ int do_item_replace(item *it, item *new_it, const uint32_t hv) {
 
 item *do_item_get(const char *key, const size_t nkey, const uint32_t hv) {
     //mutex_lock(&cache_lock);
-    item *it = assoc_find(key, nkey, hv);
+    item *it = hash_find(key, nkey, hv);
     if (it != NULL) {
         refcount_incr(&it->refcount);
     }
