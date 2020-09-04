@@ -188,7 +188,8 @@ void stat_print(stat* stats) {
 
 static stat* stats_initial(uint64_t hash_power_value){
     stat* stats;
-    *stats = {0, false, 0,0,0,0,0,0,0,0,0,0,0,0,0};
+    stat stats_ = {0, false, 0,0,0,0,0,0,0,0,0,0,0,0,0};
+    stats = &stats_;
     stats->hash_power_value= hash_power_value ;
     stats->slab_factor = 1.2 ;
 
