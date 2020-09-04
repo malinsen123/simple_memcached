@@ -130,7 +130,7 @@ void  item_update(item *it);
 unsigned short refcount_incr(unsigned short *refcount);
 unsigned short refcount_decr(unsigned short *refcount);
 
-void hash_init(hash_power_value, stat* stats);
+void hash_init(uint64_t hash_power_value, stat* stats);
 
 
 
