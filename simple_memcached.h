@@ -78,7 +78,7 @@ typedef struct _stritem {
 
 } item;
 
-struct stat_{
+typedef struct stat_{
     
     uint64_t hash_power_value;
     bool hash_is_expanding;
@@ -102,9 +102,9 @@ struct stat_{
     uint64_t del_hits;
     uint64_t del_misses;
 
-} stat_default ={0, false, 0,0,0,0,0,0,0,0,0,0,0,0,0};
+} stat;
 
-typedef struct stat_ stat;
+
 
 
 
