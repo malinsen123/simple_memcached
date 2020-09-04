@@ -173,8 +173,6 @@ static void *hash_table_expand(void) {
             if (expand_bucket == hashsize(hashpower - 1)) {
                 expanding = false;
                 free(old_hashtable);
-                stats.hash_bytes -= hashsize(hashpower - 1) * sizeof(void *);
-                stats.hash_is_expanding = false;
                 fprintf(stderr, "Hash table expansion done\n");
             }
         }
