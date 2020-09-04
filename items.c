@@ -195,12 +195,13 @@ int do_item_link(item *it, const uint32_t hv) {
     assert((it->it_flags & (ITEM_LINKED|ITEM_SLABBED)) == 0);
     it->it_flags |= ITEM_LINKED;
     it->time = current_time;
+    int hash_expand;
 
-    hash_insert(it, hv);
+    hash_expand = hash_insert(it, hv);
 
     item_link_q(it);
     refcount_incr(&it->refcount);
-    return 1;
+    return hash_expand;
 }
 
 

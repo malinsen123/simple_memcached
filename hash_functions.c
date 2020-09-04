@@ -104,7 +104,7 @@ static item** _hashitem_before (const char *key, const size_t nkey, const uint32
 }
 
 /* Note: this isn't an assoc_update.  The key must not already exist to call this */
-int hash_insert(item *it, const uint32_t hv, stat* stats) {
+int hash_insert(item *it, const uint32_t hv) {
     unsigned int oldbucket;
 
 	assert(hash_find(ITEM_key(it), it->nkey, hv) == 0);
@@ -123,6 +123,7 @@ int hash_insert(item *it, const uint32_t hv, stat* stats) {
     hash_items++;
     if (! expanding && hash_items > (hashsize(hashpower) * 3) / 2) {
         hash_table_expand();
+        return 2;
     }
 
 
@@ -152,7 +153,7 @@ void hash_delete(const char *key, const size_t nkey, const uint32_t hv) {
 }
 
 /* grows the hashtable to the next power of 2. */
-static void hash_start_expand(stat* stats) {
+static void hash_start_expand(void) {
     old_hashtable = primary_hashtable;
 
     primary_hashtable = calloc(hashsize(hashpower + 1), sizeof(void *));
@@ -163,10 +164,6 @@ static void hash_start_expand(stat* stats) {
         expanding = true;
         expand_bucket = 0;
 
-        stats.hash_power_level = hashpower;
-        stats.hash_bytes += hashsize(hashpower) * sizeof(void *);
-        stats.hash_is_expanding = true;
-
     } else {
         primary_hashtable = old_hashtable;
         /* Bad news, but we can keep running. */
@@ -174,9 +171,9 @@ static void hash_start_expand(stat* stats) {
 }
 
 
-static void *hash_table_expand(stat* stats) {
+static void *hash_table_expand(void) {
 
-        hash_start_expand(stats);
+        hash_start_expand();
         
         int i;
         unsigned int old_hashtable_sizes;

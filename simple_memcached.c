@@ -246,11 +246,16 @@ item *item_touch(const char *key, const size_t nkey, uint32_t exptime){
 
 int item_link(item *it , stat * stats){
     uint32_t hv = hash(ITEM_key(it), it->nkey);
-    if(do_item_link(it, hv)){
+    int link_success;
+    link_success = do_item_link(it, hv);
+    if(link_success == 1 || 2){
         printf("Successful link an item\n");
         stats->current_bytes += ITEM_ntotal(it);
         stats->current_items += 1;
         stats->total_items += 1;
+        if(link_success ==2){
+            stats->hash_power_value +=1;
+        }
         return 1;
     }
     else{
