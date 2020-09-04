@@ -103,32 +103,6 @@ static item** _hashitem_before (const char *key, const size_t nkey, const uint32
     return pos;
 }
 
-/* Note: this isn't an assoc_update.  The key must not already exist to call this */
-int hash_insert(item *it, const uint32_t hv) {
-    unsigned int oldbucket;
-
-	assert(hash_find(ITEM_key(it), it->nkey, hv) == 0);
-
-
-    if (expanding &&
-        (oldbucket = (hv & hashmask(hashpower - 1))) >= expand_bucket)
-    {
-        it->h_next = old_hashtable[oldbucket];
-        old_hashtable[oldbucket] = it;
-    } else {
-        it->h_next = primary_hashtable[hv & hashmask(hashpower)];
-        primary_hashtable[hv & hashmask(hashpower)] = it;
-    }
-
-    hash_items++;
-    if (! expanding && hash_items > (hashsize(hashpower) * 3) / 2) {
-        hash_table_expand();
-        return 2;
-    }
-
-
-    return 1;
-}
 
 void hash_delete(const char *key, const size_t nkey, const uint32_t hv) {
     item **before = _hashitem_before(key, nkey, hv);
@@ -178,7 +152,7 @@ static void *hash_table_expand(void) {
         int i;
         unsigned int old_hashtable_sizes;
 
-        old_hashtable_sizes= hashsize(hashpower-1)
+        old_hashtable_sizes= hashsize(hashpower-1);
 
 
         for (i = 0; i < old_hashtable_sizes  && expanding; i++) {
@@ -206,4 +180,33 @@ static void *hash_table_expand(void) {
         }
     
     return NULL;
+}
+
+
+
+/* Note: this isn't an assoc_update.  The key must not already exist to call this */
+int hash_insert(item *it, const uint32_t hv) {
+    unsigned int oldbucket;
+
+    assert(hash_find(ITEM_key(it), it->nkey, hv) == 0);
+
+
+    if (expanding &&
+        (oldbucket = (hv & hashmask(hashpower - 1))) >= expand_bucket)
+    {
+        it->h_next = old_hashtable[oldbucket];
+        old_hashtable[oldbucket] = it;
+    } else {
+        it->h_next = primary_hashtable[hv & hashmask(hashpower)];
+        primary_hashtable[hv & hashmask(hashpower)] = it;
+    }
+
+    hash_items++;
+    if (! expanding && hash_items > (hashsize(hashpower) * 3) / 2) {
+        hash_table_expand();
+        return 2;
+    }
+
+
+    return 1;
 }

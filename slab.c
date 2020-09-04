@@ -98,10 +98,8 @@ void slabs_init(const size_t limit,
         slabclass[i].size = size;
         slabclass[i].perslab = 1048576 / slabclass[i].size; 
         size *= factor; 
-        if (settings.verbose > 1) {
-            fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n",
-                    i, slabclass[i].size, slabclass[i].perslab);
-        }
+        fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n", i, slabclass[i].size, slabclass[i].perslab);
+
     }
 
     power_largest = i;
