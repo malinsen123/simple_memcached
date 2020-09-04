@@ -24,6 +24,7 @@ typedef struct {
 static slabclass_t slabclass[MAX_NUMBER_OF_SLAB_CLASSES]; 
 static size_t mem_limit = 0;
 static size_t mem_malloced = 0;
+static size_t mem_avail = 0;
 static int power_largest;
 
 static void *mem_base = NULL; 
@@ -90,7 +91,7 @@ void slabs_init(const size_t limit,
 
     memset(slabclass, 0, sizeof(slabclass));
 
-    while (++i < POWER_LARGEST && size <=  / factor) {
+    while (++i < POWER_LARGEST && size <= 1048576 / factor) {
         /* Make sure items are always n-byte aligned */
         if (size % CHUNK_ALIGN_BYTES)
             size += CHUNK_ALIGN_BYTES - (size % CHUNK_ALIGN_BYTES); 
@@ -106,19 +107,11 @@ void slabs_init(const size_t limit,
     power_largest = i;
     slabclass[power_largest].size = 1048576;
     slabclass[power_largest].perslab = 1;
-    if (settings.verbose > 1) {
-        fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n",
+
+    fprintf(stderr, "slab class %3d: chunk size %9u perslab %7u\n",
                 i, slabclass[i].size, slabclass[i].perslab);
-    }
 
-    /* for the test suite:  faking of how much we've already malloc'd */
-    {
-        char *t_initial_malloc = getenv("T_MEMD_INITIAL_MALLOC");
-        if (t_initial_malloc) {
-            mem_malloced = (size_t)atol(t_initial_malloc);
-        }
 
-    }
 
     if (prealloc) {
         slabs_preallocate(power_largest);
